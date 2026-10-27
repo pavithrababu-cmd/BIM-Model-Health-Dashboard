@@ -1,0 +1,110 @@
+<Window x:Class="BIMModelHealthDashboard.Views.FixIssuesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Fix All Issues"
+        Width="760"
+        SizeToContent="Height"
+        MaxHeight="820"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Background="#F4F6FA"
+        FontFamily="Segoe UI"
+        FontSize="12">
+
+    <Window.Resources>
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#172B4D"/>
+            <Setter Property="BorderBrush" Value="#DCE3ED"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14,6"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="Margin" Value="8,0,0,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel Margin="18">
+        <TextBlock Text="Fix All Issues"
+                   FontSize="17"
+                   FontWeight="Bold"
+                   Foreground="#172B4D"/>
+
+        <TextBlock Margin="0,6,0,12"
+                   TextWrapping="Wrap"
+                   Foreground="#61738E"
+                   Text="Choose which issues the dashboard may fix automatically. All selected fixes are applied as ONE Revit undo step (Ctrl+Z undoes everything). Elements in groups, pinned elements and elements owned by other users are skipped. Save or sync your model before continuing."/>
+
+        <ScrollViewer MaxHeight="560" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="FixList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White"
+                                BorderBrush="#DCE3ED"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="12,10"
+                                Margin="0,0,0,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                          VerticalAlignment="Top"
+                                          Margin="0,2,10,0"/>
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding Name}"
+                                               FontWeight="SemiBold"
+                                               Foreground="#172B4D"/>
+                                    <TextBlock Text="{Binding Description}"
+                                               TextWrapping="Wrap"
+                                               Foreground="#61738E"
+                                               Margin="0,3,0,0"/>
+                                    <TextBlock Text="{Binding FoundText}"
+                                               Foreground="#B7791F"
+                                               Margin="0,4,0,0"/>
+                                </StackPanel>
+
+                                <Border Grid.Column="2"
+                                        Background="{Binding RiskBackground}"
+                                        CornerRadius="4"
+                                        Padding="8,2"
+                                        Margin="12,0,0,0"
+                                        VerticalAlignment="Top">
+                                    <TextBlock Text="{Binding Risk}"
+                                               Foreground="{Binding RiskForeground}"
+                                               FontSize="11"
+                                               FontWeight="SemiBold"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <TextBlock Margin="0,4,0,0"
+                   TextWrapping="Wrap"
+                   Foreground="#61738E"
+                   Text="Not fixed automatically (needs a person): Revit warnings, materials, family types, levels, coordinates, naming, COBie data and missing parameters other than Mark. After fixing, all 16 checks run again and the new health score is shown."/>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,14,0,0">
+            <Button Content="Fix Selected"
+                    IsDefault="True"
+                    Background="#2864E8"
+                    Foreground="White"
+                    BorderBrush="#2864E8"
+                    Style="{StaticResource ActionButtonStyle}"
+                    Click="FixSelected_Click"/>
+            <Button Content="Cancel"
+                    IsCancel="True"
+                    Style="{StaticResource ActionButtonStyle}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

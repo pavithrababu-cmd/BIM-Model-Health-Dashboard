@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copy this file to %AppData%\Autodesk\Revit\Addins\2025\
+  and set <Assembly> to the full path of BIMModelHealthDashboard.dll
+  (or a path relative to this .addin file).
+  If you already have a manifest for this add-in, keep only one of them.
+-->
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>BIM Model Health Dashboard</Name>
+    <Assembly>C:\Users\Pavithra\source\repos\BIMModelHealth\BIMModelHealthDashboard\bin\Debug\net8.0-windows\BIMModelHealthDashboard.dll</Assembly>
+    <AddInId>6F1E3C52-8A4B-4D7E-9C21-3B5D7A9E0F14</AddInId>
+    <FullClassName>BIMModelHealthDashboard.App</FullClassName>
+    <VendorId>BIMH</VendorId>
+    <VendorDescription>BIM Model Health Dashboard</VendorDescription>
+  </AddIn>
+</RevitAddIns>
